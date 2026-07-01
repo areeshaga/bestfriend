@@ -1269,6 +1269,42 @@ const StickerEffects = (() => {
 })();
 
 
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const iconPlay = document.getElementById("iconPlay");
+const iconPause = document.getElementById("iconPause");
+
+playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        iconPlay.style.display = "none";
+        iconPause.style.display = "block";
+    } else {
+        audio.pause();
+        iconPlay.style.display = "block";
+        iconPause.style.display = "none";
+    }
+});
+
+const progressFill = document.getElementById("progressFill");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
+
+audio.addEventListener("loadedmetadata", () => {
+    totalTime.textContent =
+        Math.floor(audio.duration / 60) + ":" +
+        String(Math.floor(audio.duration % 60)).padStart(2, "0");
+});
+
+audio.addEventListener("timeupdate", () => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = percent + "%";
+
+    currentTime.textContent =
+        Math.floor(audio.currentTime / 60) + ":" +
+        String(Math.floor(audio.currentTime % 60)).padStart(2, "0");
+});
+
 /* ── 14. RIPPLE EFFECT (Buttons) ─────────────────────────── */
 
 const RippleEffect = (() => {
