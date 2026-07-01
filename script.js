@@ -747,88 +747,7 @@ const MusicPlayer = (() => {
     }
   }
 
-  /* Play / pause */
-  function play() {
-    isPlaying = true;
-    lastTick  = null;
 
-    if (els.albumArt)  els.albumArt.classList.add('spinning');
-    if (els.waveBars)  els.waveBars.classList.add('playing');
-    if (els.floatHeart1) { els.floatHeart1.style.opacity = '1'; }
-    if (els.floatHeart2) { els.floatHeart2.style.opacity = '1'; }
-    if (els.floatHeart3) { els.floatHeart3.style.opacity = '1'; }
-
-    updatePlayIcon(true);
-
-    if (audio) audio.play().catch(() => {});
-    cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(tick);
-  }
-
-  function pause() {
-    isPlaying = false;
-
-    if (els.albumArt)  els.albumArt.classList.remove('spinning');
-    if (els.waveBars)  els.waveBars.classList.remove('playing');
-    if (els.floatHeart1) { els.floatHeart1.style.opacity = '0'; }
-    if (els.floatHeart2) { els.floatHeart2.style.opacity = '0'; }
-    if (els.floatHeart3) { els.floatHeart3.style.opacity = '0'; }
-
-    updatePlayIcon(false);
-
-    if (audio) audio.pause();
-    cancelAnimationFrame(rafId);
-    lastTick = null;
-  }
-
-  function togglePlay() {
-    if (isPlaying) pause(); else play();
-  }
-
-  /* Update play/pause icon */
-  function updatePlayIcon(playing) {
-    if (!els.playIconWrap) return;
-    if (playing) {
-      els.playIconWrap.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="5"  y="4" width="4" height="16" rx="1.5" fill="white"/>
-          <rect x="15" y="4" width="4" height="16" rx="1.5" fill="white"/>
-        </svg>`;
-    } else {
-      els.playIconWrap.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M6 4.5L20 12L6 19.5V4.5Z" fill="white"/>
-        </svg>`;
-    }
-  }
-
-  /* Next / Previous */
-  function nextTrack() {
-    let next = isShuffled
-      ? Math.floor(Math.random() * TRACKS.length)
-      : (trackIndex + 1) % TRACKS.length;
-    trackIndex = next;
-    loadTrack(trackIndex);
-    if (isPlaying) {
-      play();
-    } else {
-      currentTime = 0;
-      updateProgress(0);
-    }
-  }
-
-  function prevTrack() {
-    if (currentTime > 3) {
-      // Restart current track
-      currentTime = 0;
-      lastTick = null;
-      if (audio) audio.currentTime = 0;
-      updateProgress(0);
-    } else {
-      trackIndex = (trackIndex - 1 + TRACKS.length) % TRACKS.length;
-      loadTrack(trackIndex);
-    }
-  }
 
   /* Like */
   function toggleLike() {
@@ -870,26 +789,7 @@ const MusicPlayer = (() => {
     els.repeatBtn.setAttribute('aria-pressed', String(isRepeated));
   }
 
-  /* Volume */
-  function setVolume(val) {
-    volume = clamp(val, 0, 1);
-    isMuted = volume === 0;
-    if (audio) audio.volume = volume;
-    if (els.volumeSlider) els.volumeSlider.value = String(Math.round(volume * 100));
-    updateMuteIcon();
-  }
 
-  function toggleMute() {
-    if (isMuted) {
-      isMuted = false;
-      setVolume(volume > 0 ? volume : 0.6);
-    } else {
-      isMuted = true;
-      if (audio) audio.volume = 0;
-      if (els.volumeSlider) els.volumeSlider.value = '0';
-    }
-    updateMuteIcon();
-  }
 
   function updateMuteIcon() {
     if (!els.muteBtn) return;
