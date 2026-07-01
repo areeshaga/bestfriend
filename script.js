@@ -1702,6 +1702,104 @@ function initAll() {
   }
 }
 
+
+// ================= MUSIC PLAYER =================
+
+const audio = document.getElementById("audio");
+
+const playBtn = document.getElementById("playBtn");
+const playIcon = document.getElementById("iconPlay");
+const pauseIcon = document.getElementById("iconPause");
+
+const progressFill = document.getElementById("progressFill");
+const progressBar = document.getElementById("progressBar");
+
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
+
+const volumeSlider = document.getElementById("volumeSlider");
+
+// Play / Pause
+playBtn.addEventListener("click", () => {
+
+    if (audio.paused) {
+
+        audio.play();
+
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "block";
+
+    } else {
+
+        audio.pause();
+
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+    }
+
+});
+
+// Song Loaded
+audio.addEventListener("loadedmetadata", () => {
+
+    totalTime.textContent =
+        formatTime(audio.duration);
+
+});
+
+// Progress
+audio.addEventListener("timeupdate", () => {
+
+    currentTime.textContent =
+        formatTime(audio.currentTime);
+
+    const percent =
+        (audio.currentTime / audio.duration) * 100;
+
+    progressFill.style.width = percent + "%";
+
+});
+
+// Click Progress Bar
+progressBar.addEventListener("click", (e) => {
+
+    const rect = progressBar.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+
+    const percent = x / rect.width;
+
+    audio.currentTime = percent * audio.duration;
+
+});
+
+// Volume
+volumeSlider.addEventListener("input", () => {
+
+    audio.volume = volumeSlider.value / 100;
+
+});
+
+// When song ends
+audio.addEventListener("ended", () => {
+
+    playIcon.style.display = "block";
+    pauseIcon.style.display = "none";
+
+});
+
+// Time format
+function formatTime(seconds){
+
+    if(isNaN(seconds)) return "0:00";
+
+    const min = Math.floor(seconds / 60);
+
+    const sec = Math.floor(seconds % 60);
+
+    return min + ":" + String(sec).padStart(2,"0");
+
+}
 /* ── 23. DOM READY ────────────────────────────────────────── */
 
 if (document.readyState === 'loading') {
