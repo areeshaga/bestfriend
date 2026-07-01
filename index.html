@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="To My Best Friend — a personal little corner of the internet" />
+  <title>To My Best Friend</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       CURSOR GLOW
+  ══════════════════════════════════════════════ -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       STAR CANVAS BACKGROUND
+  ══════════════════════════════════════════════ -->
+  <canvas class="star-canvas" id="starCanvas" aria-hidden="true"></canvas>
+
+  <!-- ══════════════════════════════════════════════
+       FLOATING PARTICLES
+  ══════════════════════════════════════════════ -->
+  <div class="particles-container" id="particlesContainer" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════ -->
+  <header class="navbar" id="navbar" role="banner">
+    <div class="nav-inner">
+
+      <!-- Logo -->
+      <a href="#" class="nav-logo" aria-label="Home">
+        <svg class="nav-logo-heart" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+        </svg>
+        <span>to my best friend</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" aria-label="Main navigation">
+        <ul role="list">
+          <li><a href="#home"    class="nav-link active" data-section="home">home</a></li>
+          <li><a href="#about"   class="nav-link"        data-section="about">about</a></li>
+          <li><a href="#moments" class="nav-link"        data-section="moments">moments</a></li>
+          <li><a href="#letters" class="nav-link"        data-section="letters">letters</a></li>
+          <li><a href="#gallery" class="nav-link"        data-section="gallery">gallery</a></li>
+          <li><a href="#music"   class="nav-link"        data-section="music">music</a></li>
+        </ul>
+      </nav>
+
+      <!-- Moon Button -->
+      <button class="nav-moon" id="themeToggle" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#D8B8FF"/>
+        </svg>
+      </button>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="#home"    class="nav-link" data-section="home">home</a></li>
+        <li><a href="#about"   class="nav-link" data-section="about">about</a></li>
+        <li><a href="#moments" class="nav-link" data-section="moments">moments</a></li>
+        <li><a href="#letters" class="nav-link" data-section="letters">letters</a></li>
+        <li><a href="#gallery" class="nav-link" data-section="gallery">gallery</a></li>
+        <li><a href="#music"   class="nav-link" data-section="music">music</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════ -->
+  <main>
+    <section class="hero" id="home" aria-labelledby="heroTitle">
+
+      <!-- Background gradient blobs -->
+      <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+      <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+
+      <!-- SVG Doodles -->
+      <div class="doodle doodle-star1" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#B57CFF" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-star2" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#D8B8FF" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-star3" aria-hidden="true">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#B57CFF" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-moon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#D8B8FF" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-sparkle1" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#B57CFF" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-sparkle2" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#D8B8FF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-plus1" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="#B57CFF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-plus2" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="#D8B8FF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-dots" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="4"  cy="4"  r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="14" cy="4"  r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="24" cy="4"  r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="4"  cy="14" r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="14" cy="14" r="2" fill="#B57CFF" opacity="0.6"/>
+          <circle cx="24" cy="14" r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="4"  cy="24" r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="14" cy="24" r="2" fill="#B57CFF" opacity="0.4"/>
+          <circle cx="24" cy="24" r="2" fill="#B57CFF" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <div class="hero-inner">
+
+        <!-- ── Hero Left ── -->
+        <div class="hero-left">
+
+          <div class="hero-title-group reveal-left" style="--delay:0.05s">
+            <span class="hero-small">hi there,</span>
+            <h1 class="hero-title" id="heroTitle">
+              to my<br/>best friend
+            </h1>
+            <div class="hero-villain-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+              </svg>
+              <span class="badge-text">forever &amp; always</span>
+            </div>
+          </div>
+
+          <div class="hero-text reveal-left" style="--delay:0.18s">
+            <p class="hero-body">
+              this little corner of the internet is just for you. a place
+              where i keep all our memories, the songs we love, and
+              the things i never quite know how to say out loud.
+            </p>
+            <p class="hero-accent">
+              because you deserve something that feels as warm
+              and wonderful as you make me feel.
+            </p>
+            <p class="hero-body2">
+              scroll down and explore — there are little surprises
+              hidden everywhere, just like you always do for me.
+            </p>
+          </div>
+
+          <!-- Paper License Card -->
+          <div class="license-card reveal-left" style="--delay:0.3s" role="img" aria-label="Best Friend License Card">
+            <div class="sticky-tape"></div>
+            <div class="paperclip" aria-hidden="true">
+              <svg width="18" height="36" viewBox="0 0 18 36" fill="none">
+                <path d="M9 2 C5 2 2 5 2 9 L2 27 C2 31.4 5.6 35 10 35 C14.4 35 18 31.4 18 27 L18 9 C18 7 16.5 5.5 14.5 5.5 C12.5 5.5 11 7 11 9 L11 27 C11 28.1 10.1 29 9 29 C7.9 29 7 28.1 7 27 L7 9" stroke="#B57CFF" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="license-inner">
+              <div class="license-avatar" aria-hidden="true">
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                  <circle cx="22" cy="22" r="22" fill="rgba(181,124,255,0.14)"/>
+                  <circle cx="22" cy="18" r="8" fill="rgba(181,124,255,0.5)"/>
+                  <ellipse cx="22" cy="36" rx="12" ry="8" fill="rgba(181,124,255,0.4)"/>
+                </svg>
+              </div>
+              <div>
+                <p class="license-title">
+                  official best friend<br/>
+                  <span>license holder</span>
+                </p>
+                <p class="license-sub">valid for a lifetime &amp; beyond</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow doodle + caption -->
+          <div class="hero-caption-wrap reveal-left" style="--delay:0.4s" aria-label="Arrow pointing to music player">
+            <svg width="48" height="32" viewBox="0 0 48 32" fill="none" aria-hidden="true">
+              <path d="M2 4 C8 4 10 28 34 28" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+              <path d="M30 22 L34 28 L40 24" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="hero-caption-text">our song is playing</span>
+          </div>
+
+        </div>
+
+        <!-- ── Hero Right — Music Player ── -->
+        <div class="hero-right reveal-right" style="--delay:0.12s">
+
+          <div class="player-card" id="playerCard" role="region" aria-label="Music Player">
+
+            <!-- Inner glow ring -->
+            <div class="player-glow-ring" aria-hidden="true"></div>
+
+            <!-- Top label -->
+            <div class="player-top-label" aria-hidden="true">
+              <span class="player-dot"></span>
+              <span class="player-label-text">now playing</span>
+              <span class="player-dot"></span>
+            </div>
+
+            <!-- Album art -->
+            <div class="player-album-wrap" id="albumWrap">
+              <div class="player-album" id="albumArt" aria-label="Album artwork">
+                <svg width="100%" height="100%" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="albumGrad" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%"   stop-color="#2a1a4a"/>
+                      <stop offset="100%" stop-color="#070814"/>
+                    </radialGradient>
+                    <radialGradient id="diskHole" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%"   stop-color="#B57CFF" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="#B57CFF" stop-opacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <circle cx="80" cy="80" r="80" fill="url(#albumGrad)"/>
+                  <!-- decorative rings -->
+                  <circle cx="80" cy="80" r="70" stroke="#B57CFF" stroke-width="0.5" opacity="0.15"/>
+                  <circle cx="80" cy="80" r="55" stroke="#B57CFF" stroke-width="0.5" opacity="0.12"/>
+                  <circle cx="80" cy="80" r="40" stroke="#B57CFF" stroke-width="0.5" opacity="0.1"/>
+                  <!-- stars on album -->
+                  <circle cx="40" cy="35" r="1.5" fill="#D8B8FF" opacity="0.6"/>
+                  <circle cx="60" cy="20" r="1"   fill="#D8B8FF" opacity="0.5"/>
+                  <circle cx="110" cy="45" r="1.5" fill="#D8B8FF" opacity="0.5"/>
+                  <circle cx="125" cy="70" r="1"   fill="#D8B8FF" opacity="0.4"/>
+                  <circle cx="30"  cy="90" r="1"   fill="#D8B8FF" opacity="0.4"/>
+                  <circle cx="50"  cy="120" r="1.5" fill="#D8B8FF" opacity="0.5"/>
+                  <circle cx="120" cy="115" r="1"   fill="#D8B8FF" opacity="0.4"/>
+                  <!-- heart silhouette -->
+                  <path d="M80 98 C80 98 60 86 60 74 a10 10 0 0 1 20-2 a10 10 0 0 1 20 2 C100 86 80 98 80 98z" fill="#B57CFF" opacity="0.35"/>
+                  <!-- center hole -->
+                  <circle cx="80" cy="80" r="8" fill="#0d0d1a"/>
+                  <circle cx="80" cy="80" r="3" fill="#B57CFF" opacity="0.5"/>
+                </svg>
+              </div>
+
+              <!-- Floating hearts -->
+              <div class="float-heart fh1" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+                </svg>
+              </div>
+              <div class="float-heart fh2" aria-hidden="true">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#D8B8FF"/>
+                </svg>
+              </div>
+              <div class="float-heart fh3" aria-hidden="true">
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Track Info -->
+            <div class="player-info">
+              <h2 class="player-track-name">Lavender Haze</h2>
+              <p class="player-artist">Taylor Swift &mdash; Midnights</p>
+            </div>
+
+            <!-- Wave Visualizer -->
+            <div class="wave-bars" id="waveBars" aria-hidden="true" aria-label="Audio wave visualizer">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+
+            <!-- Progress -->
+            <div class="player-progress-wrap" role="group" aria-label="Song progress">
+              <div class="player-progress-bar"
+                   id="progressBar"
+                   role="slider"
+                   aria-valuemin="0"
+                   aria-valuemax="100"
+                   aria-valuenow="0"
+                   aria-label="Seek song"
+                   tabindex="0">
+                <div class="progress-track">
+                  <div class="progress-fill" id="progressFill"></div>
+                  <div class="progress-thumb" id="progressThumb"></div>
+                </div>
+              </div>
+              <div class="progress-times">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">3:42</span>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="player-controls" role="group" aria-label="Playback controls">
+
+              <button class="ctrl-btn ctrl-like" id="likeBtn" aria-label="Like this song" aria-pressed="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#B57CFF" stroke-width="2" fill="none" class="like-path"/>
+                </svg>
+              </button>
+
+              <button class="ctrl-btn ctrl-prev" id="prevBtn" aria-label="Previous track">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M19 20L9 12l10-8v16zM5 19V5" stroke="#B8B8C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <button class="ctrl-btn ctrl-play" id="playBtn" aria-label="Play">
+                <div class="play-icon" id="playIcon">
+                  <svg id="iconPlay" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 5l11 7-11 7V5z" fill="white"/>
+                  </svg>
+                  <svg id="iconPause" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none">
+                    <rect x="6" y="4" width="4" height="16" rx="1" fill="white"/>
+                    <rect x="14" y="4" width="4" height="16" rx="1" fill="white"/>
+                  </svg>
+                </div>
+                <div class="play-ripple" aria-hidden="true"></div>
+              </button>
+
+              <button class="ctrl-btn ctrl-next" id="nextBtn" aria-label="Next track">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 4l10 8-10 8V4zM19 5v14" stroke="#B8B8C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <button class="ctrl-btn ctrl-repeat" id="repeatBtn" aria-label="Repeat" aria-pressed="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M17 2l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" stroke="#B8B8C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+            </div>
+
+            <!-- Volume -->
+            <div class="player-volume" role="group" aria-label="Volume control">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#B8B8C8"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#B8B8C8" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <div class="volume-slider-wrap">
+                <input class="volume-slider" id="volumeSlider" type="range" min="0" max="100" value="75" aria-label="Volume"/>
+                <div class="volume-fill" id="volumeFill" style="width:75%"></div>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#B8B8C8"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" stroke="#B8B8C8" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Decorative corner stars on the card -->
+            <div class="card-deco-star card-star-tl" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#B57CFF" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="card-deco-star card-star-tr" aria-hidden="true">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#D8B8FF" opacity="0.4"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-label="Scroll down">
+        <span class="scroll-text">scroll down</span>
+        <div class="scroll-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke="#B57CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         ABOUT SECTION
+    ══════════════════════════════════════════════ -->
+    <section class="section about-section" id="about" aria-labelledby="aboutTitle">
+
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">about us</span>
+          <h2 class="section-title" id="aboutTitle">
+            the story of us
+          </h2>
+          <p class="section-subtitle">
+            two weirdos who somehow found each other
+          </p>
+        </div>
+
+        <div class="about-grid">
+
+          <!-- Card 1 — how we met -->
+          <div class="about-card paper-card reveal-up" style="--delay:0.1s">
+            <div class="sticky-tape sticky-tape-tilt"></div>
+            <div class="paper-lines" aria-hidden="true"></div>
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="10" r="3" stroke="#B57CFF" stroke-width="2"/>
+                <path d="M6 20v-2a6 6 0 0 1 12 0v2" stroke="#B57CFF" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="about-card-title">how we met</h3>
+            <p class="about-card-text">
+              somewhere between chaos and coincidence, the universe decided
+              we needed to find each other. and honestly? best decision
+              the universe ever made.
+            </p>
+          </div>
+
+          <!-- Card 2 — things we love -->
+          <div class="about-card paper-card reveal-up" style="--delay:0.22s">
+            <div class="sticky-tape sticky-tape-right"></div>
+            <div class="paper-lines" aria-hidden="true"></div>
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF" opacity="0.8"/>
+              </svg>
+            </div>
+            <h3 class="about-card-title">things we love</h3>
+            <p class="about-card-text">
+              late night calls, sad songs we replay 20 times, coffee that
+              goes cold while we talk too much, and existing in the same
+              universe at the same time.
+            </p>
+          </div>
+
+          <!-- Card 3 — our number -->
+          <div class="about-card paper-card reveal-up" style="--delay:0.34s">
+            <div class="sticky-tape"></div>
+            <div class="paper-lines" aria-hidden="true"></div>
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#B57CFF" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="#B57CFF" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="about-card-title">our count</h3>
+            <div class="count-row" aria-label="Years of friendship">
+              <span class="count-num" data-target="3">0</span>
+              <span class="count-label">years</span>
+              <span class="count-sep">&bull;</span>
+              <span class="count-num" data-target="1247">0</span>
+              <span class="count-label">days</span>
+              <span class="count-sep">&bull;</span>
+              <span class="count-num" data-target="8">0</span>
+              <span class="count-label">inside jokes</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         MOMENTS SECTION
+    ══════════════════════════════════════════════ -->
+    <section class="section moments-section" id="moments" aria-labelledby="momentsTitle">
+
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">memories</span>
+          <h2 class="section-title" id="momentsTitle">little moments</h2>
+          <p class="section-subtitle">the ones i never want to forget</p>
+        </div>
+
+        <div class="moments-grid">
+
+          <div class="moment-card reveal-up" style="--delay:0.08s">
+            <div class="moment-card-inner">
+              <div class="moment-doodle moment-doodle-coffee" aria-hidden="true">
+                <svg width="40" height="44" viewBox="0 0 40 44" fill="none">
+                  <rect x="6" y="14" width="24" height="22" rx="4" fill="none" stroke="#B57CFF" stroke-width="1.5"/>
+                  <path d="M30 20 C36 20 36 30 30 30" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M14 8 C14 5 18 5 18 8" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                  <path d="M20 6 C20 3 24 3 24 6" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="moment-title">3am coffee runs</h3>
+              <p class="moment-text">
+                when the whole world was asleep and we were the
+                only ones awake, talking about everything and nothing.
+              </p>
+              <span class="moment-tag">#bestmemory</span>
+            </div>
+          </div>
+
+          <div class="moment-card reveal-up" style="--delay:0.18s">
+            <div class="moment-card-inner">
+              <div class="moment-doodle moment-doodle-star" aria-hidden="true">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+                  <path d="M19 3l4.2 12.7H36l-10.5 7.6 4 12.7L19 28.5 8.5 36l4-12.7L2 15.7h12.8z" stroke="#B57CFF" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="moment-title">stargazing nights</h3>
+              <p class="moment-text">
+                lying on the grass, making up constellation names,
+                deciding which star was ours. it was that one, remember?
+              </p>
+              <span class="moment-tag">#ourfavorite</span>
+            </div>
+          </div>
+
+          <div class="moment-card reveal-up" style="--delay:0.28s">
+            <div class="moment-card-inner">
+              <div class="moment-doodle moment-doodle-music" aria-hidden="true">
+                <svg width="36" height="40" viewBox="0 0 36 40" fill="none">
+                  <path d="M10 30V10l20-4v20" stroke="#B57CFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <circle cx="10" cy="30" r="4" stroke="#B57CFF" stroke-width="1.5" fill="none"/>
+                  <circle cx="30" cy="26" r="4" stroke="#B57CFF" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="moment-title">playlist moments</h3>
+              <p class="moment-text">
+                every song we shared became a memory. every lyric
+                felt like something we should have written ourselves.
+              </p>
+              <span class="moment-tag">#ourplaylist</span>
+            </div>
+          </div>
+
+          <div class="moment-card reveal-up" style="--delay:0.38s">
+            <div class="moment-card-inner">
+              <div class="moment-doodle moment-doodle-cloud" aria-hidden="true">
+                <svg width="48" height="30" viewBox="0 0 48 30" fill="none">
+                  <path d="M12 22 a8 8 0 0 1 0-16 a6 6 0 0 1 11.5-3 A7 7 0 1 1 38 22Z" stroke="#B57CFF" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <h3 class="moment-title">daydreaming together</h3>
+              <p class="moment-text">
+                making plans we might never keep, dreaming about
+                futures that feel magical because you're in them.
+              </p>
+              <span class="moment-tag">#someday</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         LETTERS SECTION
+    ══════════════════════════════════════════════ -->
+    <section class="section letters-section" id="letters" aria-labelledby="lettersTitle">
+
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">open letters</span>
+          <h2 class="section-title" id="lettersTitle">things i want to say</h2>
+          <p class="section-subtitle">the notes i wrote and almost didn't send</p>
+        </div>
+
+        <div class="letters-layout">
+
+          <!-- Main letter -->
+          <div class="letter-main paper-card reveal-left" style="--delay:0.1s">
+            <div class="sticky-tape sticky-tape-center"></div>
+            <div class="letter-header">
+              <span class="letter-date">written on a rainy tuesday</span>
+              <div class="letter-tag-row" aria-hidden="true">
+                <span class="letter-dot"></span>
+                <span class="letter-dot letter-dot-filled"></span>
+                <span class="letter-dot"></span>
+              </div>
+            </div>
+            <div class="paper-lines" aria-hidden="true"></div>
+            <p class="letter-greeting">dear best friend,</p>
+            <p class="letter-body">
+              i don't say this enough but — thank you. thank you for
+              picking up when i call at weird hours. for remembering
+              the small things. for laughing at my terrible jokes even
+              when they're genuinely awful.
+            </p>
+            <p class="letter-body">
+              you have this way of making ordinary moments feel like
+              they matter. like we're in a movie that nobody else is
+              watching, and honestly that's my favorite kind.
+            </p>
+            <p class="letter-body">
+              i hope you know that you are so very loved. not in a
+              loud, dramatic way (though sometimes that too) but in the
+              steady, reliable, always-there kind of way.
+            </p>
+            <p class="letter-sign">with all the love,<br/><span class="letter-signature">me</span></p>
+          </div>
+
+          <!-- Side sticky notes -->
+          <div class="letter-side">
+
+            <div class="sticky-note note-yellow reveal-right" style="--delay:0.15s">
+              <div class="paper-lines" aria-hidden="true"></div>
+              <p class="sticky-text">
+                reminder: you are literally the funniest person i know
+                and i will not be taking questions
+              </p>
+              <div class="sticky-heart" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="sticky-note note-purple reveal-right" style="--delay:0.28s">
+              <div class="paper-lines" aria-hidden="true"></div>
+              <p class="sticky-text">
+                p.s. thank you for always knowing when i need silence
+                and when i need you to talk forever
+              </p>
+            </div>
+
+            <div class="sticky-note note-blue reveal-right" style="--delay:0.4s">
+              <div class="paper-lines" aria-hidden="true"></div>
+              <p class="sticky-text">
+                things we should do: road trip, bake at midnight,
+                watch every studio ghibli film in order
+              </p>
+              <div class="sticky-checkmarks" aria-label="Checklist">
+                <span class="check-item"><span class="check-box"></span> road trip</span>
+                <span class="check-item"><span class="check-box"></span> midnight bake</span>
+                <span class="check-item"><span class="check-box check-done"></span> ghibli marathon</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         GALLERY SECTION
+    ══════════════════════════════════════════════ -->
+    <section class="section gallery-section" id="gallery" aria-labelledby="galleryTitle">
+
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">gallery</span>
+          <h2 class="section-title" id="galleryTitle">our aesthetic</h2>
+          <p class="section-subtitle">vibes, moods, and things that feel like us</p>
+        </div>
+
+        <div class="gallery-grid">
+
+          <div class="gallery-card gc-tall reveal-up" style="--delay:0.05s">
+            <div class="gallery-placeholder gc-1" role="img" aria-label="Gallery image 1">
+              <div class="gc-overlay">
+                <span class="gc-label">late nights</span>
+              </div>
+              <!-- SVG illustration -->
+              <svg width="100%" height="100%" viewBox="0 0 220 320" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                <rect width="220" height="320" fill="#12112a"/>
+                <circle cx="110" cy="100" r="40" fill="none" stroke="#B57CFF" stroke-width="0.5" opacity="0.3"/>
+                <circle cx="110" cy="100" r="25" fill="#2a1a4a" opacity="0.6"/>
+                <circle cx="110" cy="100" r="12" fill="#B57CFF" opacity="0.2"/>
+                <circle cx="40"  cy="50"  r="1.5" fill="#D8B8FF" opacity="0.7"/>
+                <circle cx="80"  cy="30"  r="1"   fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="160" cy="60"  r="1.5" fill="#D8B8FF" opacity="0.6"/>
+                <circle cx="190" cy="40"  r="1"   fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="170" cy="160" r="1"   fill="#D8B8FF" opacity="0.4"/>
+                <circle cx="30"  cy="200" r="1.5" fill="#D8B8FF" opacity="0.5"/>
+                <path d="M110 200 C80 200 60 220 60 260 L60 320 L160 320 L160 260 C160 220 140 200 110 200z" fill="#1a1230" opacity="0.8"/>
+                <path d="M110 200 C110 200 90 210 85 230" stroke="#B57CFF" stroke-width="1" opacity="0.3" fill="none"/>
+                <path d="M110 200 C110 200 130 210 135 230" stroke="#B57CFF" stroke-width="1" opacity="0.3" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="gallery-card gc-wide reveal-up" style="--delay:0.15s">
+            <div class="gallery-placeholder gc-2" role="img" aria-label="Gallery image 2">
+              <div class="gc-overlay">
+                <span class="gc-label">coffee &amp; clouds</span>
+              </div>
+              <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                <rect width="320" height="160" fill="#0e0d1f"/>
+                <circle cx="80"  cy="60"  r="30" fill="none" stroke="#B57CFF" stroke-width="20" stroke-opacity="0.04"/>
+                <circle cx="240" cy="90"  r="45" fill="none" stroke="#B57CFF" stroke-width="30" stroke-opacity="0.03"/>
+                <path d="M100 100 a20 20 0 0 1 0-40 a15 15 0 0 1 28-8 A18 18 0 1 1 160 100z" fill="none" stroke="#B57CFF" stroke-width="1" opacity="0.3"/>
+                <path d="M200 90 a14 14 0 0 1 0-28 a10 10 0 0 1 19-5 A12 12 0 1 1 240 90z" fill="none" stroke="#D8B8FF" stroke-width="1" opacity="0.25"/>
+                <circle cx="50"  cy="30"  r="1"   fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="150" cy="20"  r="1.5" fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="280" cy="140" r="1"   fill="#D8B8FF" opacity="0.4"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="gallery-card gc-normal reveal-up" style="--delay:0.1s">
+            <div class="gallery-placeholder gc-3" role="img" aria-label="Gallery image 3">
+              <div class="gc-overlay">
+                <span class="gc-label">playlists</span>
+              </div>
+              <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                <rect width="200" height="200" fill="#110f22"/>
+                <circle cx="100" cy="100" r="60" fill="none" stroke="#B57CFF" stroke-width="1" opacity="0.15"/>
+                <circle cx="100" cy="100" r="40" fill="none" stroke="#B57CFF" stroke-width="1" opacity="0.12"/>
+                <circle cx="100" cy="100" r="20" fill="#2a1a4a" opacity="0.5"/>
+                <circle cx="100" cy="100" r="6"  fill="#B57CFF" opacity="0.4"/>
+                <path d="M100 40 L100 35" stroke="#D8B8FF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <path d="M140 60 L143 56" stroke="#D8B8FF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                <path d="M60 60 L57 56" stroke="#D8B8FF" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="gallery-card gc-normal reveal-up" style="--delay:0.25s">
+            <div class="gallery-placeholder gc-4" role="img" aria-label="Gallery image 4">
+              <div class="gc-overlay">
+                <span class="gc-label">our vibe</span>
+              </div>
+              <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                <rect width="200" height="200" fill="#0d0c20"/>
+                <path d="M100 160 C100 160 55 130 55 95 a25 25 0 0 1 45-15 a25 25 0 0 1 45 15 C145 130 100 160 100 160z" fill="#B57CFF" opacity="0.22"/>
+                <circle cx="40"  cy="40"  r="1.5" fill="#D8B8FF" opacity="0.6"/>
+                <circle cx="160" cy="30"  r="1"   fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="170" cy="160" r="1.5" fill="#D8B8FF" opacity="0.4"/>
+                <circle cx="30"  cy="170" r="1"   fill="#D8B8FF" opacity="0.5"/>
+                <path d="M100 160 C100 160 55 130 55 95 a25 25 0 0 1 45-15 a25 25 0 0 1 45 15 C145 130 100 160 100 160z" fill="none" stroke="#B57CFF" stroke-width="1.5" opacity="0.5"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="gallery-card gc-wide2 reveal-up" style="--delay:0.32s">
+            <div class="gallery-placeholder gc-5" role="img" aria-label="Gallery image 5">
+              <div class="gc-overlay">
+                <span class="gc-label">midnight thoughts</span>
+              </div>
+              <svg width="100%" height="100%" viewBox="0 0 460 160" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                <rect width="460" height="160" fill="#0b0b1e"/>
+                <circle cx="80"  cy="80"  r="50" fill="none" stroke="#B57CFF" stroke-width="0.5" opacity="0.1"/>
+                <circle cx="230" cy="80"  r="60" fill="none" stroke="#B57CFF" stroke-width="0.5" opacity="0.1"/>
+                <circle cx="380" cy="80"  r="50" fill="none" stroke="#B57CFF" stroke-width="0.5" opacity="0.1"/>
+                <path d="M200 50 C210 35 230 35 230 50 C230 35 250 35 260 50 C260 70 230 90 230 90 C230 90 200 70 200 50z" fill="#B57CFF" opacity="0.18"/>
+                <circle cx="40"  cy="20"  r="1"   fill="#D8B8FF" opacity="0.4"/>
+                <circle cx="120" cy="15"  r="1.5" fill="#D8B8FF" opacity="0.5"/>
+                <circle cx="350" cy="25"  r="1"   fill="#D8B8FF" opacity="0.4"/>
+                <circle cx="430" cy="140" r="1.5" fill="#D8B8FF" opacity="0.4"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         MUSIC SECTION
+    ══════════════════════════════════════════════ -->
+    <section class="section music-section" id="music" aria-labelledby="musicTitle">
+
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">our playlist</span>
+          <h2 class="section-title" id="musicTitle">songs for you</h2>
+          <p class="section-subtitle">every song is a little love letter</p>
+        </div>
+
+        <div class="playlist-container">
+
+          <div class="playlist-track reveal-up" style="--delay:0.05s" data-track="0" role="button" tabindex="0" aria-label="Play Lavender Haze by Taylor Swift">
+            <div class="track-num">01</div>
+            <div class="track-bar-wrap" aria-hidden="true">
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+            </div>
+            <div class="track-info">
+              <span class="track-name">Lavender Haze</span>
+              <span class="track-artist">Taylor Swift</span>
+            </div>
+            <div class="track-duration" aria-label="3 minutes 42 seconds">3:42</div>
+            <button class="track-heart" aria-label="Like Lavender Haze" aria-pressed="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="playlist-track reveal-up" style="--delay:0.12s" data-track="1" role="button" tabindex="0" aria-label="Play enchanted by Taylor Swift">
+            <div class="track-num">02</div>
+            <div class="track-bar-wrap" aria-hidden="true">
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+            </div>
+            <div class="track-info">
+              <span class="track-name">enchanted</span>
+              <span class="track-artist">Taylor Swift</span>
+            </div>
+            <div class="track-duration" aria-label="5 minutes 52 seconds">5:52</div>
+            <button class="track-heart" aria-label="Like enchanted" aria-pressed="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#B57CFF" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="playlist-track reveal-up" style="--delay:0.19s" data-track="2" role="button" tabindex="0" aria-label="Play Cornelia Street by Taylor Swift">
+            <div class="track-num">03</div>
+            <div class="track-bar-wrap" aria-hidden="true">
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+            </div>
+            <div class="track-info">
+              <span class="track-name">Cornelia Street</span>
+              <span class="track-artist">Taylor Swift</span>
+            </div>
+            <div class="track-duration" aria-label="4 minutes 48 seconds">4:48</div>
+            <button class="track-heart" aria-label="Like Cornelia Street" aria-pressed="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="playlist-track reveal-up" style="--delay:0.26s" data-track="3" role="button" tabindex="0" aria-label="Play The Night We Met by Lord Huron">
+            <div class="track-num">04</div>
+            <div class="track-bar-wrap" aria-hidden="true">
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+            </div>
+            <div class="track-info">
+              <span class="track-name">The Night We Met</span>
+              <span class="track-artist">Lord Huron</span>
+            </div>
+            <div class="track-duration" aria-label="3 minutes 28 seconds">3:28</div>
+            <button class="track-heart" aria-label="Like The Night We Met" aria-pressed="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" stroke="#B57CFF" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="playlist-track reveal-up" style="--delay:0.33s" data-track="4" role="button" tabindex="0" aria-label="Play Before He Cheats by Carrie Underwood">
+            <div class="track-num">05</div>
+            <div class="track-bar-wrap" aria-hidden="true">
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+              <span class="track-playing-bar"></span>
+            </div>
+            <div class="track-info">
+              <span class="track-name">Lofi Dreaming</span>
+              <span class="track-artist">various artists</span>
+            </div>
+            <div class="track-duration" aria-label="2 minutes 58 seconds">2:58</div>
+            <button class="track-heart" aria-label="Like Lofi Dreaming" aria-pressed="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════ -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+
+        <div class="footer-logo" aria-label="Site logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" fill="#B57CFF"/>
+          </svg>
+          <span class="footer-logo-text">to my best friend</span>
+        </div>
+
+        <p class="footer-text">
+          made with love, purple pens, and too many late nights
+        </p>
+
+        <div class="footer-stars" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#B57CFF" opacity="0.5"/>
+          </svg>
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#D8B8FF" opacity="0.4"/>
+          </svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l2.2 6.7H21l-5.6 4.1 2.1 6.7L12 16l-5.5 3.5 2.1-6.7L3 8.7h6.8z" fill="#B57CFF" opacity="0.5"/>
+          </svg>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
+</body>
+</html>
