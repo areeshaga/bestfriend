@@ -677,26 +677,7 @@ const MusicPlayer = (() => {
     };
   }
 
-  /* Load track */
-  function loadTrack(index) {
-    const track = TRACKS[index];
-    if (!track) return;
 
-    duration    = track.duration;
-    currentTime = 0;
-
-    if (els.trackNameEl) els.trackNameEl.textContent = track.title;
-    if (els.artistEl)    els.artistEl.textContent    = track.artist;
-    if (els.totalTimeEl) els.totalTimeEl.textContent = formatTime(duration);
-    if (els.currentTimeEl) els.currentTimeEl.textContent = '0:00';
-
-    updateProgress(0);
-
-    if (audio && track.file) {
-      audio.src = track.file;
-      if (isPlaying) audio.play().catch(() => {});
-    }
-  }
 
   /* Update progress bar UI */
   function updateProgress(pct) {
@@ -709,44 +690,8 @@ const MusicPlayer = (() => {
   }
 
   /* Animation tick — simulates progress when no audio file is loaded */
-  function tick(ts) {
-    if (!isPlaying) return;
-
-    if (lastTick !== null) {
-      const delta = (ts - lastTick) / 1000;
-      if (audio && !audio.paused && !isNaN(audio.duration)) {
-        currentTime = audio.currentTime;
-        duration    = audio.duration;
-      } else {
-        // Demo simulation
-        currentTime = clamp(currentTime + delta, 0, duration);
-      }
-    }
-
-    lastTick = ts;
-
-    const pct = (currentTime / duration) * 100;
-    updateProgress(pct);
-
-    if (currentTime >= duration) {
-      onTrackEnd();
-      return;
-    }
-
-    rafId = requestAnimationFrame(tick);
-  }
-
-  function onTrackEnd() {
-    if (isRepeated) {
-      currentTime = 0;
-      lastTick    = null;
-      if (audio) { audio.currentTime = 0; audio.play().catch(() => {}); }
-      rafId = requestAnimationFrame(tick);
-    } else {
-      nextTrack();
-    }
-  }
-
+ 
+  
 
 
   /* Like */
