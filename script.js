@@ -1287,101 +1287,116 @@ function initAll() {
 
 // ================= MUSIC PLAYER =================
 
-const audio = document.getElementById("audio");
+/* ── MUSIC PLAYER MODULE ───────────────────────────────── */
 
-const playBtn = document.getElementById("playBtn");
-const playIcon = document.getElementById("iconPlay");
-const pauseIcon = document.getElementById("iconPause");
+const MusicPlayer = (() => {
 
-const progressFill = document.getElementById("progressFill");
-const progressBar = document.getElementById("progressBar");
+    let audio,
+        playBtn,
+        playIcon,
+        pauseIcon,
+        progressFill,
+        progressBar,
+        currentTime,
+        totalTime,
+        volumeSlider;
 
-const currentTime = document.getElementById("currentTime");
-const totalTime = document.getElementById("totalTime");
+    function init() {
 
-const volumeSlider = document.getElementById("volumeSlider");
+        audio = document.getElementById("audio");
+        playBtn = document.getElementById("playBtn");
+        playIcon = document.getElementById("iconPlay");
+        pauseIcon = document.getElementById("iconPause");
+        progressFill = document.getElementById("progressFill");
+        progressBar = document.getElementById("progressBar");
+        currentTime = document.getElementById("currentTime");
+        totalTime = document.getElementById("totalTime");
+        volumeSlider = document.getElementById("volumeSlider");
 
-// Play / Pause
-playBtn.addEventListener("click", () => {
+        if (
+            !audio ||
+            !playBtn ||
+            !progressFill ||
+            !progressBar ||
+            !currentTime ||
+            !totalTime ||
+            !volumeSlider
+        ) {
+            console.warn("Music Player elements not found.");
+            return;
+        }
 
-    if (audio.paused) {
+        // Play / Pause
+        playBtn.addEventListener("click", () => {
 
-        audio.play();
+            if (audio.paused) {
 
-        playIcon.style.display = "none";
-        pauseIcon.style.display = "block";
+                audio.play();
 
-    } else {
+                if (playIcon) playIcon.style.display = "none";
+                if (pauseIcon) pauseIcon.style.display = "block";
 
-        audio.pause();
+            } else {
 
-        playIcon.style.display = "block";
-        pauseIcon.style.display = "none";
+                audio.pause();
+
+                if (playIcon) playIcon.style.display = "block";
+                if (pauseIcon) pauseIcon.style.display = "none";
+            }
+
+        });
+
+        // Metadata
+        audio.addEventListener("loadedmetadata", () => {
+            totalTime.textContent = formatTime(audio.duration);
+        });
+
+        // Progress
+        audio.addEventListener("timeupdate", () => {
+
+            currentTime.textContent = formatTime(audio.currentTime);
+
+            if (audio.duration) {
+                progressFill.style.width =
+                    (audio.currentTime / audio.duration) * 100 + "%";
+            }
+
+        });
+
+        // Seek
+        progressBar.addEventListener("click", (e) => {
+
+            const rect = progressBar.getBoundingClientRect();
+
+            const percent =
+                (e.clientX - rect.left) / rect.width;
+
+            audio.currentTime =
+                percent * audio.duration;
+
+        });
+
+        // Volume
+        volumeSlider.addEventListener("input", () => {
+
+            audio.volume =
+                volumeSlider.value / 100;
+
+        });
+
+        // Ended
+        audio.addEventListener("ended", () => {
+
+            if (playIcon) playIcon.style.display = "block";
+            if (pauseIcon) pauseIcon.style.display = "none";
+
+        });
+
     }
 
-});
+    return { init };
 
-// Song Loaded
-audio.addEventListener("loadedmetadata", () => {
-
-    totalTime.textContent =
-        formatTime(audio.duration);
-
-});
-
-// Progress
-audio.addEventListener("timeupdate", () => {
-
-    currentTime.textContent =
-        formatTime(audio.currentTime);
-
-    const percent =
-        (audio.currentTime / audio.duration) * 100;
-
-    progressFill.style.width = percent + "%";
-
-});
-
-// Click Progress Bar
-progressBar.addEventListener("click", (e) => {
-
-    const rect = progressBar.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-
-    const percent = x / rect.width;
-
-    audio.currentTime = percent * audio.duration;
-
-});
-
-// Volume
-volumeSlider.addEventListener("input", () => {
-
-    audio.volume = volumeSlider.value / 100;
-
-});
-
-// When song ends
-audio.addEventListener("ended", () => {
-
-    playIcon.style.display = "block";
-    pauseIcon.style.display = "none";
-
-});
-
-// Time format
-function formatTime(seconds){
-
-    if(isNaN(seconds)) return "0:00";
-
-    const min = Math.floor(seconds / 60);
-
-    const sec = Math.floor(seconds % 60);
-
-    return min + ":" + String(sec).padStart(2,"0");
-
-}
+})();
 /* ── 23. DOM READY ────────────────────────────────────────── */
 
 if (document.readyState === 'loading') {
